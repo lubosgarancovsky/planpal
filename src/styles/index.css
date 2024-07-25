@@ -1,0 +1,27 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0deg 0% 96%;
+    --background-100: 0deg 0% 92%;
+
+    --foreground: 0deg 0% 0%;
+    --foreground-dimmed: 0deg 0% 42%;
+    --foreground-highlight: 215deg 20% 36%;
+  }
+
+  html {
+    font-family: 'Inter', sans-serif;
+  }
+
+  body {
+    @apply bg-background;
+  }
+
+  h4 {
+    @apply font-medium text-foreground-highlight;
+  }
+}
