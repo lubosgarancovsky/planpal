@@ -6,3 +6,5 @@ export * from './dialog';
 export * from './editable';
 export * from './input';
 export * from './navbar';
+export * from './textarea';
+export * from './badge';

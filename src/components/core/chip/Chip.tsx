@@ -10,38 +10,50 @@ interface ChipProps {
   classname?: string;
 }
 
-const Chip: React.FC<ChipProps> = ({ children, color, classname, onClose }) => {
-  return (
-    <div
-      className={cn(
-        ' rounded-full px-3 text-sm flex items-center gap-2 h-fit',
-        {
-          'pr-0': onClose,
-          'border border-foreground-dimmed/50': !color
-        },
-        classname
-      )}
-      {...(color && {
+const Chip: React.FC<ChipProps> = ({
+  children,
+  color: backgroundColor,
+  classname,
+  onClose
+}) => {
+  const chipClasses = cn(
+    ' rounded-full px-3 text-sm flex items-center gap-2 h-fit',
+    {
+      'pr-0': !!onClose,
+      'border border-foreground-dimmed/50': !backgroundColor
+    },
+    classname
+  );
+
+  const color = backgroundColor
+    ? isLight(backgroundColor)
+      ? '#000'
+      : '#fff'
+    : undefined;
+
+  const getStyleProp = (bg?: string) => {
+    if (color) {
+      return {
         style: {
-          backgroundColor: color,
-          color: isLight(color) ? '#000' : '#fff'
+          backgroundColor: bg,
+          color
         }
-      })}
-    >
+      };
+    }
+  };
+
+  return (
+    <div className={chipClasses} {...getStyleProp(backgroundColor)}>
       {children}
-      {onClose && (
+      {!!onClose && (
         <Button
           variant="text"
           iconOnly
           startContent={<Close className="w-3" />}
           className="hover:bg-foreground-dimmed/20 rounded-full"
           onClick={onClose}
-          {...(color && {
-            style: {
-              color: isLight(color) ? '#000' : '#fff'
-            }
-          })}
-        ></Button>
+          {...getStyleProp()}
+        />
       )}
     </div>
   );

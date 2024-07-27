@@ -1,5 +1,5 @@
 import { createContext, useContext } from 'react';
-import { Task } from '../utils/api';
+import { Task } from '../utils';
 
 interface TaskDetailContextType {
   selectedTask: Task | null;

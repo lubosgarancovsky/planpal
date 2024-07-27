@@ -1,12 +1,14 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { baseUrl, Task } from '../../../utils/api';
-import axios from 'axios';
+import { baseUrl } from '../../../utils/api';
 import { useEffect, useMemo, useState } from 'react';
 import { useTaskDetailContex } from '../../../context/task-detail-context';
+import { Task } from '../../../utils';
+import axios from 'axios';
 
 export const useTaskDetail = () => {
   const queryClient = useQueryClient();
   const { selectedTask, setSelectedTask } = useTaskDetailContex();
+
   const [updatedTask, setUpdatedTask] = useState<Task | null>(selectedTask);
 
   useEffect(() => {
@@ -37,6 +39,7 @@ export const useTaskDetail = () => {
       const keys = Object.keys(selectedTask);
 
       for (const key of keys) {
+        //@ts-ignore
         if (updatedTask[key] !== selectedTask[key]) {
           return true;
         }

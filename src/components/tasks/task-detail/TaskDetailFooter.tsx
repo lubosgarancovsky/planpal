@@ -4,6 +4,7 @@ import { Trash } from '../../icons';
 import { Task } from '../../../utils';
 import { UseMutationResult } from '@tanstack/react-query';
 import { AxiosResponse } from 'axios';
+import { Flex } from '../../layout';
 
 interface TaskDetailFooterProps {
   task: Task;
@@ -31,14 +32,14 @@ const TaskDetailFooter: React.FC<TaskDetailFooterProps> = ({
       </Button>
 
       {hasDifferences && (
-        <div className="flex gap-2">
+        <Flex gap="md">
           <Button onClick={save} disabled={!hasDifferences}>
             Save
           </Button>
           <Button onClick={reset} variant="secondary">
             Reset
           </Button>
-        </div>
+        </Flex>
       )}
     </div>
   );

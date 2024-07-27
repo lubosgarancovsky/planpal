@@ -1,12 +1,11 @@
-import React, { useRef, useState } from 'react';
+import React from 'react';
 import { TaskDetail } from '../tasks';
-import { baseUrl, cn, Task } from '../../utils';
+import { cn } from '../../utils';
 import { useTaskDetailContex } from '../../context/task-detail-context';
 import { ThemeSwitch } from '../theme';
 import { Button, Navbar, NavbarDesktop, NavbarMobile } from '../core';
-import { useMutation, useQueryClient } from '@tanstack/react-query';
-import axios, { AxiosResponse } from 'axios';
 import { Download, Upload } from '../icons';
+import { useFileHandler } from '../../hooks';
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -14,66 +13,7 @@ interface LayoutProps {
 
 const Layout: React.FC<LayoutProps> = ({ children }) => {
   const { selectedTask } = useTaskDetailContex();
-  const queryClient = useQueryClient();
-
-  const fileInputRef = useRef(null);
-
-  const handleDownload = () => {
-    const response = queryClient.getQueryData<AxiosResponse<Task[]>>(['tasks']);
-
-    if (response) {
-      const tasks = response.data;
-      const json = JSON.stringify(tasks);
-      const blob = new Blob([json], { type: 'application/json' });
-      const href = URL.createObjectURL(blob);
-      const link = document.createElement('a');
-      link.href = href;
-      link.download = 'tasks.json';
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
-      URL.revokeObjectURL(href);
-    }
-  };
-
-  const insertAllData = (allData: Task[]) => {
-    for (const item of allData) {
-      const { id, ...task } = item;
-      mutation.mutate(task);
-    }
-  };
-
-  const mutation = useMutation({
-    mutationKey: ['loadTasks'],
-    mutationFn: (data: Task) => axios.post(`${baseUrl()}/tasks`, data),
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['tasks'] });
-    }
-  });
-
-  const handleFileSelect = (event) => {
-    const file = event.target.files[0];
-
-    if (file) {
-      const reader = new FileReader();
-      reader.onload = (e) => {
-        try {
-          const json = JSON.parse(e.target.result);
-          insertAllData(json);
-        } catch (err) {
-          console.error('Invalid JSON file:', err);
-          alert('Failed to parse JSON file. Please check the file format.');
-        }
-      };
-      reader.readAsText(file);
-    }
-  };
-
-  const handleLoad = () => {
-    if (fileInputRef.current) {
-      fileInputRef.current.click();
-    }
-  };
+  const { ref, onFileSelect, downloadData, uploadData } = useFileHandler();
 
   return (
     <div className="flex">
@@ -84,40 +24,30 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
       >
         <header>
           <Navbar>
+            {/* Desktop version of a header */}
             <NavbarDesktop>
               <div className="flex gap-3 items-center">
-                <input
-                  type="file"
-                  accept=".json"
-                  ref={fileInputRef}
-                  style={{ display: 'none' }}
-                  onChange={handleFileSelect}
-                />
                 <Button
-                  onClick={handleLoad}
+                  onClick={uploadData}
                   startContent={<Upload />}
                   variant="ghost"
-                  children="Upload"
-                />
+                >
+                  Upload
+                </Button>
                 <Button
-                  onClick={handleDownload}
+                  onClick={downloadData}
                   startContent={<Download />}
                   variant="ghost"
-                  children="Download"
-                />
+                >
+                  Download
+                </Button>
                 <ThemeSwitch />
               </div>
             </NavbarDesktop>
 
+            {/* Mobile version of a header */}
             <NavbarMobile>
               <div className="flex flex-col gap-4 p-4">
-                <input
-                  type="file"
-                  accept=".json"
-                  ref={fileInputRef}
-                  style={{ display: 'none' }}
-                  onChange={handleFileSelect}
-                />
                 <div className="flex flex-col gap-2">
                   <h4>Upload your tasks from a file</h4>
                   <p className="text-foreground-dimmed">
@@ -126,20 +56,20 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
                   </p>
                 </div>
                 <Button
-                  onClick={handleLoad}
+                  onClick={uploadData}
                   startContent={<Upload />}
-                  iconOnly
                   variant="ghost"
-                  className="w-full bg-background-100 p-4 hover:bg-background-100"
+                  // iconOnly
+                  // className="w-full bg-background-100 p-4 hover:bg-background-100"
                 >
                   Upload
                 </Button>
                 <Button
-                  onClick={handleDownload}
+                  onClick={downloadData}
                   startContent={<Download />}
                   variant="ghost"
-                  iconOnly
-                  className="w-full bg-background-100 p-4 hover:bg-background-100"
+                  // iconOnly
+                  // className="w-full bg-background-100 p-4 hover:bg-background-100"
                 >
                   Download
                 </Button>
@@ -152,6 +82,15 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
       </div>
 
       <TaskDetail />
+
+      {/* Hidden input for file upload */}
+      <input
+        type="file"
+        accept=".json"
+        ref={ref}
+        style={{ display: 'none' }}
+        onChange={onFileSelect}
+      />
     </div>
   );
 };

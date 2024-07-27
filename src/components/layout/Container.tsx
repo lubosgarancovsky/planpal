@@ -1,5 +1,5 @@
 import React from 'react';
-import { cn } from '../../utils';
+import Flex from './Flex';
 
 interface ContainerProps {
   children: React.ReactNode;
@@ -13,10 +13,10 @@ const Container: React.FC<ContainerProps> = ({
   className
 }) => {
   return (
-    <div className={cn('flex flex-col gap-3', className)}>
+    <Flex flex="col" gap="md" className={className}>
       {heading}
       {children}
-    </div>
+    </Flex>
   );
 };
 

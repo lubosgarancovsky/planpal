@@ -13,3 +13,4 @@ export { default as Download } from './Download';
 export { default as Upload } from './Upload';
 export { default as Menu } from './Menu';
 export { default as Logo } from './Logo';
+export { default as Save } from './Save';

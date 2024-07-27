@@ -9,6 +9,7 @@ interface ThemeSwitchProps {
 
 const ThemeSwitch: React.FC<ThemeSwitchProps> = ({ className }) => {
   const { theme, toggleTheme } = useTheme();
+
   return (
     <Button
       onClick={toggleTheme}

@@ -2,6 +2,7 @@ import React from 'react';
 import { Button } from '../../core';
 import { Chevron } from '../../icons';
 import { cn } from '../../../utils';
+import { Flex } from '../../layout';
 
 interface PriorityPickerProps {
   priority: number;
@@ -14,10 +15,6 @@ const PriorityPicker: React.FC<PriorityPickerProps> = ({
 }) => {
   0;
 
-  const handleClick = (priority: number) => {
-    onChange(priority);
-  };
-
   const buttonClasses = (value: number) => {
     return cn('h-2 w-full bg-success duration-150', {
       'h-4': priority === value,
@@ -28,31 +25,31 @@ const PriorityPicker: React.FC<PriorityPickerProps> = ({
   };
 
   return (
-    <div className="flex items-center gap-3">
+    <Flex gap="md">
       <Button
         variant="secondary"
         iconOnly
         startContent={<Chevron className="-rotate-90" />}
         onClick={() => onChange((priority - 1 + 3) % 3)}
-      ></Button>
+      />
 
-      <div className="w-full rounded-full flex items-center">
+      <Flex className="w-full">
         {[0, 1, 2].map((value) => (
           <button
             key={value}
             className={buttonClasses(value)}
-            onClick={() => handleClick(value)}
-          ></button>
+            onClick={() => onChange(value)}
+          />
         ))}
-      </div>
+      </Flex>
 
       <Button
         variant="secondary"
         iconOnly
         startContent={<Chevron className="rotate-90" />}
         onClick={() => onChange((priority + 1) % 3)}
-      ></Button>
-    </div>
+      />
+    </Flex>
   );
 };
 

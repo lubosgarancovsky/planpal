@@ -28,6 +28,7 @@ const Collapsible: React.FC<CollapsibleProps> = ({
             className={cn('w-6 duration-150', { 'rotate-180': !isOpen })}
           />
         </button>
+
         <div className="flex items-center gap-1.5">
           <h4>{label}</h4>
           {!!badge && (

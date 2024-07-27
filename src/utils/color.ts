@@ -23,3 +23,21 @@ function luminance(hex: string) {
 export function isLight(hex: string) {
   return luminance(hex) > 0.179;
 }
+
+export const colors = [
+  '#E57373', // Light Red
+  '#F06292', // Light Pink
+  '#BA68C8', // Light Purple
+  '#9575CD', // Light Deep Purple
+  '#64B5F6', // Light Blue
+  '#4FC3F7', // Light Sky Blue
+  '#4DD0E1', // Light Cyan
+  '#4DB6AC', // Light Teal
+  '#81C784', // Light Green
+  '#AED581', // Light Lime Green
+  '#FFD54F', // Light Yellow
+  '#FFB74D', // Light Orange,
+  '#9e9e9e', // Light Grey,
+  '#595959', // Dark Grey,
+  '#000000' // Black,
+];

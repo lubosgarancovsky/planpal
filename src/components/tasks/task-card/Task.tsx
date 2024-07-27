@@ -1,12 +1,17 @@
 import React from 'react';
-import { Task as TaskType } from '../../../utils/api/types';
-import { Checkbox } from '../../core/checkbox';
-import { Chip } from '../../core';
-import { cn, getDateLabel } from '../../../utils';
+import { Badge, Checkbox, Chip } from '../../core';
+import {
+  cn,
+  getDateLabel,
+  tagColor,
+  tagLabel,
+  Task as TaskType
+} from '../../../utils';
 import { motion } from 'framer-motion';
 import { Calendar, Flag } from '../../icons';
 import { useTask } from './use-task';
-import { useTag } from '../../../hooks';
+import { Flex } from '../../layout';
+import { TaskPriority } from '.';
 
 interface TaskProps {
   task: TaskType;
@@ -14,7 +19,9 @@ interface TaskProps {
 
 const Task: React.FC<TaskProps> = ({ task }) => {
   const { mutation, isHighlighted, selectTask } = useTask(task);
-  const { label, color } = useTag();
+
+  const lineThrough = task.isDone ? 'line-through' : '';
+  const textDanger = isHighlighted ? 'text-danger' : '';
 
   return (
     <motion.div
@@ -33,66 +40,44 @@ const Task: React.FC<TaskProps> = ({ task }) => {
       </div>
 
       <button
-        className="flex flex-col tb2:flex-row tb2:justify-between gap-3 tb2:gap-6 tb2:items-center text-start hover:bg-background-100 py-1.5 px-3 duration-150 rounded w-full"
+        className="flex flex-col tb2:flex-row tb2:justify-between gap-3 tb2:gap-6 tb2:items-center text-start active:bg-background-100 tb2:hover:bg-background-100 py-1.5 px-3 duration-150 rounded w-full"
         onClick={() => selectTask(task)}
       >
-        <div className="flex flex-col gap-1.5">
-          <div className="flex flex-col max-w-xl gap-1.5">
-            <div className="flex gap-3 items-center">
-              <span
-                className={cn('truncate', {
-                  'line-through': task.isDone
-                })}
-              >
-                {task.title}
-              </span>
-              <span
-                className={cn('w-2 h-2 rounded-full', {
-                  'bg-success': task.priority === 0,
-                  'bg-warning': task.priority === 1,
-                  'bg-danger': task.priority === 2
-                })}
-              ></span>
-            </div>
-            {task.description && (
-              <span
-                className={cn('tb2:truncate text-sm text-foreground-dimmed', {
-                  'line-through': task.isDone
-                })}
-              >
-                {task.description}
-              </span>
+        <Flex flex="col" className="max-w-4xl dm1:max-w-5xl">
+          <Flex>
+            <span className={cn('line-clamp-2', lineThrough)}>
+              {task.title}
+            </span>
+            <TaskPriority priority={task.priority} />
+          </Flex>
+          <span
+            className={cn(
+              'text-sm text-foreground-dimmed line-clamp-2',
+              lineThrough
             )}
-          </div>
+          >
+            {task.description}
+          </span>
+
           {!!task.tags.length && (
-            <div className="flex flex-wrap gap-1.5 items-center">
+            <Flex className="mt-1.5" wrap>
               {task.tags.slice(0, 5).map((tag, index) => (
-                <Chip key={index} color={color(tag)}>
-                  {label(tag)}
+                <Chip key={index} color={tagColor(tag)}>
+                  {tagLabel(tag)}
                 </Chip>
               ))}
               {task.tags.length - 5 > 0 && (
                 <Chip>{`+ ${task.tags.length - 5}`}</Chip>
               )}
-            </div>
+            </Flex>
           )}
-        </div>
-        {task.dueAt && (
-          <div
-            className={cn(
-              'flex items-center text-sm gap-2 text-foreground-highlight',
-              {
-                'text-danger': isHighlighted
-              }
-            )}
-          >
-            {isHighlighted ? (
-              <Flag className="w-4" />
-            ) : (
-              <Calendar className="w-4" />
-            )}
-            {`${getDateLabel(task.dueAt)} ${isHighlighted ? 'overdue' : ''}`}
-          </div>
+        </Flex>
+
+        {!!task.dueAt && (
+          <Badge
+            icon={isHighlighted ? <Flag /> : <Calendar />}
+            className={cn(textDanger, lineThrough)}
+          >{`${getDateLabel(task.dueAt)} ${isHighlighted ? 'overdue' : ''}`}</Badge>
         )}
       </button>
     </motion.div>

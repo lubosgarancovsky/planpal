@@ -3,6 +3,7 @@ import { Task } from '../task-card';
 import { Collapsible } from '../../core';
 import { useTaskList } from './use-tasklist';
 import { TasksListSkeleton } from '.';
+import { Flex } from '../../layout';
 
 interface TasksListProps {}
 
@@ -16,55 +17,59 @@ const TasksList: React.FC<TasksListProps> = () => {
   const isEmpty = !overdue.length && !today.length && !other.length;
 
   return (
-    <div className="flex flex-col gap-8">
+    <Flex flex="col" gap="lg">
       {!!overdue.length && (
         <Collapsible label="Overdue" badge={overdue.length} initiallyOpen>
-          <ul className="flex flex-col gap-3">
+          <Flex flex="col" as="ul" gap="md">
             {query.status === 'success' &&
               overdue.map((task) => (
                 <li key={task.id}>
                   <Task task={task} />
                 </li>
               ))}
-          </ul>
+          </Flex>
         </Collapsible>
       )}
 
       {!!today.length && (
         <Collapsible label="Today" badge={today.length} initiallyOpen>
-          <ul className="flex flex-col gap-3">
+          <Flex flex="col" as="ul" gap="md">
             {query.status === 'success' &&
               today.map((task) => (
                 <li key={task.id}>
                   <Task task={task} />
                 </li>
               ))}
-          </ul>
+          </Flex>
         </Collapsible>
       )}
 
       {!!other.length && (
         <Collapsible label="Other" badge={other.length} initiallyOpen>
-          <ul className="flex flex-col gap-3">
+          <Flex flex="col" as="ul" gap="md">
             {query.status === 'success' &&
               other.map((task) => (
                 <li key={task.id}>
                   <Task task={task} />
                 </li>
               ))}
-          </ul>
+          </Flex>
         </Collapsible>
       )}
 
       {isEmpty && (
-        <div className=" p-6 flex items-center justify-center text-center border border-foreground-dimmed/20 rounded-xl flex-col gap-3">
+        <Flex
+          flex="col"
+          gap="md"
+          className="p-6 border border-foreground-dimmed/20 rounded-xl text-center"
+        >
           <h2>Wow, so empty!</h2>
           <p className="text-foreground-dimmed">
             You currently don't have any tasks. Add some using the input above.
           </p>
-        </div>
+        </Flex>
       )}
-    </div>
+    </Flex>
   );
 };
 
