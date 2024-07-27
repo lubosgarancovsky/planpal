@@ -1,8 +1,8 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { baseUrl, dateDiff, Task } from '../../../utils';
 import { useTaskDetailContex } from '../../../context/task-detail-context';
+import { Task as TaskType } from '../../../utils';
 import axios, { AxiosResponse } from 'axios';
-import { Task as TaskType } from '../../../utils/api/types';
 
 export const useTask = (task: Task) => {
   const queryClient = useQueryClient();

@@ -12,6 +12,7 @@ import { Calendar, Flag } from '../../icons';
 import { useTask } from './use-task';
 import { Flex } from '../../layout';
 import { TaskPriority } from '.';
+import { useTaskDetailContex } from '../../../context/task-detail-context';
 
 interface TaskProps {
   task: TaskType;
@@ -19,6 +20,7 @@ interface TaskProps {
 
 const Task: React.FC<TaskProps> = ({ task }) => {
   const { mutation, isHighlighted, selectTask } = useTask(task);
+  const { selectedTask, setSelectedTask } = useTaskDetailContex();
 
   const lineThrough = task.isDone ? 'line-through' : '';
   const textDanger = isHighlighted ? 'text-danger' : '';
@@ -33,9 +35,14 @@ const Task: React.FC<TaskProps> = ({ task }) => {
         <Checkbox
           className={cn({ 'border-danger': isHighlighted })}
           isSelected={task.isDone}
-          onChange={(isSelected) =>
-            mutation.mutate({ ...task, isDone: isSelected })
-          }
+          onChange={(isSelected) => {
+            const newTask = { ...task, isDone: isSelected };
+            mutation.mutate(newTask);
+
+            if (selectedTask && selectedTask.id === task.id) {
+              setSelectedTask(newTask);
+            }
+          }}
         />
       </div>
 
