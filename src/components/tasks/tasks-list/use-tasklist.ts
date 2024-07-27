@@ -1,22 +1,16 @@
 import { useQuery } from '@tanstack/react-query';
-import { baseUrl, dateDiff, Task } from '../../../utils';
+import { baseUrl, dateDiff } from '../../../utils';
 import { useMemo } from 'react';
 import axios from 'axios';
 
 export const useTaskList = () => {
   const query = useQuery({
     queryKey: ['tasks'],
-    queryFn: () => axios.get(`${baseUrl()}/tasks`)
+    queryFn: () => axios.get(`${baseUrl()}/tasks?sortBy=createdAt&order=desc`)
   });
 
   const [overdue, today, other] = useMemo(() => {
-    const allTasks =
-      query.status === 'success'
-        ? query.data.data.sort(
-            (a: Task, b: Task) =>
-              new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
-          )
-        : [];
+    const allTasks = query.status === 'success' ? query.data.data : [];
 
     const now = new Date().toISOString();
 

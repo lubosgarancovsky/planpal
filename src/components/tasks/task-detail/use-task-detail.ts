@@ -27,7 +27,7 @@ export const useTaskDetail = () => {
 
   const remove = useMutation({
     mutationKey: ['deleteTask'],
-    mutationFn: (id: number) => axios.delete(`${baseUrl()}/tasks/${id}`),
+    mutationFn: (id: string) => axios.delete(`${baseUrl()}/tasks/${id}`),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['tasks'] });
       setSelectedTask(null);

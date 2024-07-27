@@ -3,7 +3,7 @@ export interface WithChildren {
 }
 
 export interface Task {
-  id: number;
+  id: string;
   createdAt: string;
   title: string;
   description: string;

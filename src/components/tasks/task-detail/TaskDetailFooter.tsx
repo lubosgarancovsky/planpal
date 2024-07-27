@@ -8,7 +8,7 @@ import { Flex } from '../../layout';
 
 interface TaskDetailFooterProps {
   task: Task;
-  remove: UseMutationResult<AxiosResponse<any, any>, Error, number, unknown>;
+  remove: UseMutationResult<AxiosResponse<any, any>, Error, string, unknown>;
   hasDifferences: boolean;
   reset: () => void;
   save: () => void;
