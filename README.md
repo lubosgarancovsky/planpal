@@ -45,7 +45,7 @@ npm install
 Now visit the [mockapi.io](https://mockapi.io) website, log in and create a new project.
 Choose the name of the project and the API prefix (for example: `/api/v1`).
 
-Create new resource by clicking on the `New resource` button and create a schema by following this example:
+Create new resource called `tasks` by clicking on the `New resource` button and create a schema by following this example:
 
 | Name        | Type      |
 | ----------- | --------- |
@@ -57,6 +57,8 @@ Create new resource by clicking on the `New resource` button and create a schema
 | createdAt   | String    |
 | dueAt       | String    |
 | isDone      | Boolean   |
+
+- This schema needs to be named -> `tasks`
 
 ### Setup the environment variables
 
