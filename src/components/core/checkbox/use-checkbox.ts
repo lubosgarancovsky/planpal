@@ -31,7 +31,7 @@ export const useCheckbox = (props: CheckboxProps) => {
 
   const styles = cn(
     'duration-150 w-5 h-5 border border-foreground-dimmed/50 rounded overflow-hidden cursor-pointer flex items-center justify-center',
-    { 'bg-black hover:bg-neutral-700': isSelected },
+    { 'bg-black tb2:hover:bg-neutral-700': isSelected },
     { 'hover:bg-background-100': !isSelected },
     { 'pointer-events-none': isReadOnly || isDisabled },
     props.className

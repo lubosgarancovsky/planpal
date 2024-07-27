@@ -10,7 +10,7 @@ const Badge: React.FC<BadgeProps> = ({ className, icon, children }) => {
   return (
     <div
       className={cn(
-        'flex items-center text-sm gap-2 text-foreground-highlight',
+        'flex items-center text-sm gap-2 text-foreground-dimmed',
         className
       )}
     >

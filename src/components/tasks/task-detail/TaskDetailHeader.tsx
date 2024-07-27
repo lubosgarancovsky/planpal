@@ -1,8 +1,8 @@
 import React from 'react';
 import DatePicker from 'react-datepicker';
 
-import { cn, dateDiff, formatDate, Task } from '../../../utils';
-import { Checkbox, Button } from '../../core';
+import { cn, dateDiff, formatDate, getDateLabel, Task } from '../../../utils';
+import { Checkbox, Button, Badge } from '../../core';
 import { Calendar, Flag, Close } from '../../icons';
 import { Flex } from '../../layout';
 
@@ -20,6 +20,8 @@ const TaskDetailHeader: React.FC<TaskDetailHeaderProps> = ({
   const isOverdue =
     task?.dueAt && dateDiff(new Date().toISOString(), task.dueAt) < 0;
 
+  const label = task?.dueAt && isOverdue && getDateLabel(task.dueAt);
+
   return (
     <Flex
       gap="md"
@@ -28,7 +30,6 @@ const TaskDetailHeader: React.FC<TaskDetailHeaderProps> = ({
       <Checkbox
         isSelected={task?.isDone}
         onChange={(isSelected) => setTask({ ...task, isDone: isSelected })}
-        className={cn({ 'border-danger': isOverdue })}
       />
 
       <div className="w-[1px] h-4 bg-foreground-dimmed/50" />
@@ -38,9 +39,7 @@ const TaskDetailHeader: React.FC<TaskDetailHeaderProps> = ({
         customInput={
           <Button
             variant="text"
-            className={cn('text-foreground px-0', {
-              'text-danger': isOverdue
-            })}
+            className={cn('text-foreground px-0')}
             startContent={<Calendar />}
           >
             {task.dueAt ? formatDate(task.dueAt) : 'No due date'}
@@ -51,7 +50,11 @@ const TaskDetailHeader: React.FC<TaskDetailHeaderProps> = ({
         }
       />
 
-      {isOverdue && <Flag className="w-5 text-danger" />}
+      {isOverdue && (
+        <Badge className="text-danger" icon={<Flag />}>
+          {label}
+        </Badge>
+      )}
 
       <Button
         variant="secondary"

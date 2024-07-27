@@ -1,15 +1,14 @@
 import React, { useState } from 'react';
-import { cn } from '../../../utils';
+import { WithChildren } from '../../../utils';
 import { Button } from '../button';
 import { Close, Logo, Menu } from '../../icons';
 import { AnimatePresence, motion } from 'framer-motion';
 import { ThemeSwitch } from '../../theme';
+import { Flex } from '../../layout';
 
-interface NavbarProps {
-  children?: React.ReactNode;
-}
+interface NavbarProps extends WithChildren {}
 
-export const NavbarMobile = ({ children }) => {
+export const NavbarMobile: React.FC<WithChildren> = ({ children }) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
   return (
@@ -48,22 +47,22 @@ export const NavbarMobile = ({ children }) => {
   );
 };
 
-export const NavbarDesktop = ({ children }) => {
+export const NavbarDesktop: React.FC<WithChildren> = ({ children }) => {
   return <div className="tb2:flex hidden">{children}</div>;
 };
 
 const Navbar: React.FC<NavbarProps> = ({ children }) => {
-  const classNames = cn(
-    'flex gap-3 items-center justify-between p-3 tb2:px-6 bg-background-200'
-  );
   return (
-    <div className={classNames}>
-      <h1 className="flex gap-3 items-center">
+    <Flex
+      gap="md"
+      className="justify-between p-3 tb2:px-6 bg-background dark:bg-background-200"
+    >
+      <Flex as="h1" gap="md">
         <Logo className="w-8 text-primary" />
-        PlanPal
-      </h1>
+        <span>PlanPal</span>
+      </Flex>
       {children}
-    </div>
+    </Flex>
   );
 };
 

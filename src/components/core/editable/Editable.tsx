@@ -1,5 +1,5 @@
 import React from 'react';
-import { Pencil, Save, Trash } from '../../icons';
+import { Save } from '../../icons';
 import { cn } from '../../../utils';
 import { Button } from '../button';
 import { Textarea } from '../textarea';
@@ -19,8 +19,6 @@ const Editable: React.FC<EditableProps> = ({ ...props }) => {
     value,
     setValue,
     setIsActive,
-    isHovered,
-    setIsHovered,
     onSave,
     className,
     ...otherProps
@@ -30,46 +28,43 @@ const Editable: React.FC<EditableProps> = ({ ...props }) => {
     <>
       {isActive ? (
         <div>
-          <Textarea value={value} onChange={(e) => setValue(e.target.value)} />
+          <Textarea
+            value={value}
+            onChange={(e) => setValue(e.target.value)}
+            rows={8}
+          />
           <div className="flex gap-1.5 items-center mt-2 justify-end">
             <Button
               onClick={() => {
                 setIsActive((p) => !p);
                 onSave(value);
               }}
-              iconOnly
               startContent={<Save />}
-            />
+            >
+              Save
+            </Button>
 
             <Button
               onClick={() => {
                 setIsActive((p) => !p);
                 setValue(children);
               }}
-              iconOnly
               variant="secondary"
-              startContent={<Trash />}
-            />
+            >
+              Back
+            </Button>
           </div>
         </div>
       ) : (
         <Component
-          className={cn('flex gap-2 relative', className)}
-          onMouseEnter={() => setIsHovered(true)}
-          onMouseLeave={() => setIsHovered(false)}
+          className={cn(
+            'flex gap-2 relative hover:ring-1 hover:ring-primary rounded-sm hover:ring-offset-8 ring-offset-background ring-0 duration-150',
+            className
+          )}
+          onDoubleClick={() => setIsActive((p) => !p)}
           {...otherProps}
         >
           {children}
-          {isHovered && (
-            <Button
-              className="absolute top-0 right-0 bg-background text-base font-normal"
-              onClick={() => setIsActive((p) => !p)}
-              endContent={<Pencil />}
-              variant="text"
-            >
-              Edit
-            </Button>
-          )}
         </Component>
       )}
     </>

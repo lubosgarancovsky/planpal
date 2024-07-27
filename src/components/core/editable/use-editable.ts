@@ -9,7 +9,6 @@ export interface EditableProps extends React.HTMLAttributes<HTMLElement> {
 export const useEditable = (props: EditableProps) => {
   const { as, children, onSave, className, ...otherProps } = props;
 
-  const [isHovered, setIsHovered] = useState(false);
   const [isActive, setIsActive] = useState(false);
   const [value, setValue] = useState(children);
 
@@ -26,8 +25,6 @@ export const useEditable = (props: EditableProps) => {
     setValue,
     isActive,
     setIsActive,
-    isHovered,
-    setIsHovered,
     children,
     className,
     onSave,

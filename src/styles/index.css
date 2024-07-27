@@ -11,8 +11,7 @@
     --background-200: 240deg 100% 96%;
 
     --foreground: 0deg 0% 0%;
-    --foreground-dimmed: 0deg 0% 42%;
-    --foreground-highlight: 215deg 20% 36%;
+    --foreground-dimmed: 215deg 20% 36%;
 
     --danger: 359deg 67% 50%;
     --warning: 55deg 83% 49%;
@@ -27,7 +26,6 @@
 
     --foreground: 226deg 44% 89%;
     --foreground-dimmed: 226deg 11% 65%;
-    --foreground-highlight: 226deg 44% 89%;
 
     --danger: 359deg 100% 63%;
     --warning: 55deg 83% 49%;
@@ -53,10 +51,10 @@
   }
 
   h4 {
-    @apply font-medium text-foreground-highlight;
+    @apply font-medium text-foreground-dimmed;
   }
 
   h5 {
-    @apply uppercase text-foreground-highlight text-sm tracking-widest;
+    @apply uppercase text-foreground-dimmed text-xs tracking-widest;
   }
 }

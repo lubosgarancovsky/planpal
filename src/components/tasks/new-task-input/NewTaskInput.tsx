@@ -62,7 +62,7 @@ export default NewTaskInput;
 /*
 <input
       ref={inputRef}
-      className="p-3 bg-background-100 rounded-md w-full text-foreground-highlight"
+      className="p-3 bg-background-100 rounded-md w-full text-foreground-dimmed"
       placeholder="Add new task and press enter"
       onKeyDown={(e) => {
         if (e.key === 'Enter') {

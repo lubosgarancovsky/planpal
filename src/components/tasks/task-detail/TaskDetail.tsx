@@ -4,7 +4,7 @@ import PriorityPicker from './PriorityPicker';
 import { CreateTagDialog, TaskDetailFooter, TaskDetailHeader } from '.';
 import { Chip, Editable } from '../../core';
 import { useTaskDetail } from './use-task-detail';
-import { cn, tagLabel } from '../../../utils';
+import { cn, formatDate, tagLabel } from '../../../utils';
 import { Container, Flex } from '../../layout';
 import { AnimatePresence, motion } from 'framer-motion';
 import { useTaskDetailContex } from '../../../context/task-detail-context';
@@ -117,6 +117,14 @@ const TaskDetail: React.FC = () => {
                     setTask({ ...task, priority: priority })
                   }
                 />
+              </Container>
+
+              <Container heading={<h5>Created at</h5>}>
+                <Flex className="justify-between">
+                  <span className="text-foreground-dimmed">
+                    {formatDate(task.createdAt)}
+                  </span>
+                </Flex>
               </Container>
             </Flex>
 

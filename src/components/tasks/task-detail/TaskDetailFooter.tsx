@@ -31,16 +31,14 @@ const TaskDetailFooter: React.FC<TaskDetailFooterProps> = ({
         Delete
       </Button>
 
-      {hasDifferences && (
-        <Flex gap="md">
-          <Button onClick={save} disabled={!hasDifferences}>
-            Save
-          </Button>
-          <Button onClick={reset} variant="secondary">
-            Reset
-          </Button>
-        </Flex>
-      )}
+      <Flex gap="md">
+        <Button onClick={save} disabled={!hasDifferences}>
+          Save
+        </Button>
+        <Button onClick={reset} variant="secondary" disabled={!hasDifferences}>
+          Reset
+        </Button>
+      </Flex>
     </div>
   );
 };

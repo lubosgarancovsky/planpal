@@ -1,5 +1,5 @@
 export interface WithChildren {
-  children: React.ReactNode;
+  children?: React.ReactNode;
 }
 
 export interface Task {

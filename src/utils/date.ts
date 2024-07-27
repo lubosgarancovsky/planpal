@@ -3,7 +3,7 @@ export const formatDate = (isoDate: string): string => {
 
   const date = new Date(isoDate);
 
-  const options = {
+  const options: any = {
     month: 'long',
     day: 'numeric',
     year: 'numeric'
@@ -21,6 +21,7 @@ export const dateDiff = (date1: string, date2: string) => {
   d1.setHours(0, 0, 0, 0);
   d2.setHours(0, 0, 0, 0);
 
+  //@ts-ignore
   const differenceInTime = d2 - d1;
 
   const differenceInDays = differenceInTime / (1000 * 60 * 60 * 24);
@@ -28,7 +29,7 @@ export const dateDiff = (date1: string, date2: string) => {
   return differenceInDays;
 };
 
-export const getDateLabel = (isoDate) => {
+export const getDateLabel = (isoDate: string) => {
   const currentDate = new Date().toISOString().split('T')[0];
   const differenceInDays = dateDiff(currentDate, isoDate);
 
@@ -42,14 +43,14 @@ export const getDateLabel = (isoDate) => {
     const absDifference = Math.abs(differenceInDays);
 
     if (absDifference < 7) {
-      return `${absDifference} days`;
+      return `${absDifference} ${absDifference > 1 ? 'days' : 'day'}`;
     } else {
       const weeks = Math.floor(absDifference / 7);
       if (weeks < 52) {
-        return `${weeks} weeks`;
+        return `${weeks} ${weeks === 1 ? 'week' : 'weeks'}`;
       } else {
         const years = Math.floor(weeks / 52);
-        return `${years} years`;
+        return `${years} ${years > 1 ? 'years' : 'year'}`;
       }
     }
   }

@@ -11,8 +11,7 @@ export default {
         },
         foreground: {
           DEFAULT: 'hsl(var(--foreground) / <alpha-value>)',
-          dimmed: 'hsl(var(--foreground-dimmed) / <alpha-value>)',
-          highlight: 'hsl(var(--foreground-highlight) / <alpha-value>)'
+          dimmed: 'hsl(var(--foreground-dimmed) / <alpha-value>)'
         },
         danger: 'hsl(var(--danger) / <alpha-value>)',
         success: 'hsl(var(--success) / <alpha-value>)',
