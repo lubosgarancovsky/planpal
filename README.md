@@ -7,14 +7,14 @@ PlanPal is a React project bootstrapped with [Vite](https://vitejs.dev/). It is 
 - [PlanPal](#planpal)
   - [Table of Contents](#table-of-contents)
   - [Installation](#installation)
-    - [Clone the reposiory](#clone-the-reposiory)
+    - [Clone the repository](#clone-the-repository)
     - [Setup mockapi.io project](#setup-mockapiio-project)
     - [Setup the environment variables](#setup-the-environment-variables)
     - [Run the application](#run-the-application)
 
 ## Installation
 
-### Clone the reposiory
+### Clone the repository
 
 To get started, clone the repository and install the dependencies:
 
@@ -70,4 +70,4 @@ or host the application on your local network with
 npm run dev-host
 ```
 
-Visit http://localhost:5173/
+Visit http://localhost:5173/ to see the application running.
