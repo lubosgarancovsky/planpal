@@ -51,7 +51,7 @@ Create new resource called `tasks` by clicking on the `New resource` button and 
 | ----------- | --------- |
 | id          | Object ID |
 | title       | String    |
-| desciprtion | String    |
+| description | String    |
 | priority    | Number    |
 | tags        | Array     |
 | createdAt   | String    |
