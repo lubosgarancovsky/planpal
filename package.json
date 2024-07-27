@@ -5,6 +5,7 @@
   "type": "module",
   "repository": "https://github.com/lubosgarancovsky/planpal",
   "author": "https://github.com/lubosgarancovsky",
+  "homepage": "https://lubosgarancovsky.github.io/planpal/",
   "scripts": {
     "dev": "vite",
     "dev-host": "vite --host",
