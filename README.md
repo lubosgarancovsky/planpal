@@ -1,18 +1,34 @@
 # PlanPal
 
-PlanPal is a React project bootstrapped with [Vite](https://vitejs.dev/). It is a todo application that uses [mockapi.io](https://mockapi.io) to manage users tasks.
+[PlanPal](https://lubosgarancovsky.github.io/planpal/) is a React project bootstrapped with [Vite](https://vitejs.dev/). It is a todo application that uses [mockapi.io](https://mockapi.io) to manage users tasks.
 
 ## Table of Contents
 
 - [PlanPal](#planpal)
   - [Table of Contents](#table-of-contents)
   - [Installation](#installation)
+    - [Prerequisites](#prerequisites)
     - [Clone the repository](#clone-the-repository)
     - [Setup mockapi.io project](#setup-mockapiio-project)
     - [Setup the environment variables](#setup-the-environment-variables)
     - [Run the application](#run-the-application)
+  - [Features](#features)
+    - [List of Tasks](#list-of-tasks)
+    - [Tags](#tags)
+    - [Due Date](#due-date)
+    - [Priority](#priority)
+    - [Editing](#editing)
+    - [Import/Export](#importexport)
+    - [Responsivity](#responsivity)
+    - [Dark mode](#dark-mode)
+  - [Visit](#visit)
 
 ## Installation
+
+### Prerequisites
+
+- [Node.js](https://nodejs.org/en/download/package-manager)
+- npm
 
 ### Clone the repository
 
@@ -71,3 +87,55 @@ npm run dev-host
 ```
 
 Visit http://localhost:5173/ to see the application running.
+
+## Features
+
+### List of Tasks
+
+- Manage your tasks in a list view.
+- Each task includes relevant details such as title, description, and status.
+- Tasks can be marked as completed, reprioritized, edited and deleted
+
+### Tags
+
+- Organize tasks with custom tags.
+- Tags help to categorize the tasks.
+
+### Due Date
+
+- Set due dates for tasks to keep track of deadlines.
+- Due dates help prioritize tasks and manage time effectively.
+
+### Priority
+
+Every task can be assigned a priority to differentiate between more and less important tasks:
+
+- **Low** (green): Tasks that are less urgent.
+- **Medium** (yellow): Tasks that require moderate attention.
+- **High** (red): Tasks that are of high importance and need immediate action.
+
+### Editing
+
+- Tasks are edited in the side panel after being opened from the list
+- Title and description becomes editable by double clicking
+- Changes made inside a side panel need to be saved by the button in the footer
+
+### Import/Export
+
+- **Export**: Allows users to export their tasks data into a JSON file. This feature is useful for backing up data or transferring it to another instance.
+- **Import**: Users can import their tasks from a JSON file back into the application. This feature enables easy restoration of tasks and data migration.
+
+### Responsivity
+
+- Application is optimalized for mobile devices
+
+### Dark mode
+
+Application has two color modes, one of them is initially enabled based on the preferrence of the browser. Color mode can later be changed using the button in the header.
+
+- Light
+- Dark
+
+## Visit
+
+Visit hosted application [here](https://lubosgarancovsky.github.io/planpal/).
