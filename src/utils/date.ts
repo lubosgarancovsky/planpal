@@ -1,3 +1,9 @@
+/**
+ * Formats a given ISO date string into a human-readable date string.
+ *
+ * @param {string} isoDate - The ISO date string to format.
+ * @return {string} The formatted date string.
+ */
 export const formatDate = (isoDate: string): string => {
   if (!isoDate) return '';
 
@@ -14,6 +20,13 @@ export const formatDate = (isoDate: string): string => {
   return formattedDate;
 };
 
+/**
+ * Calculates the difference in days between two dates.
+ *
+ * @param {string} date1 - The first date in ISO string format.
+ * @param {string} date2 - The second date in ISO string format.
+ * @return {number} The difference in days between the two dates.
+ */
 export const dateDiff = (date1: string, date2: string) => {
   const d1 = new Date(date1);
   const d2 = new Date(date2);
@@ -23,35 +36,46 @@ export const dateDiff = (date1: string, date2: string) => {
 
   //@ts-ignore
   const differenceInTime = d2 - d1;
-
-  const differenceInDays = differenceInTime / (1000 * 60 * 60 * 24);
-
-  return differenceInDays;
+  return differenceInTime / (1000 * 60 * 60 * 24);
 };
 
-export const getDateLabel = (isoDate: string) => {
+/**
+ * Returns a label representing the time difference between the current date and the given ISO date.
+ *
+ * @param {string} isoDate - The ISO date string to compare with the current date.
+ * @return {string} The label representing the time difference. Possible values are:
+ *   - 'Today' if the difference is 0 days.
+ *   - 'Tomorrow' if the difference is 1 day.
+ *   - The formatted date if the difference is greater than 1 day.
+ *   - The number of days and the appropriate label if the difference is between 1 and 6 days.
+ *   - The number of weeks and the appropriate label if the difference is between 7 and 364 days.
+ *   - The number of years and the appropriate label if the difference is greater than 364 days.
+ */
+export const getDateLabel = (isoDate: string): string => {
   const currentDate = new Date().toISOString().split('T')[0];
-  const differenceInDays = dateDiff(currentDate, isoDate);
+  const timeDifference = dateDiff(currentDate, isoDate);
 
-  if (differenceInDays === 0) {
+  if (timeDifference === 0) {
     return 'Today';
-  } else if (differenceInDays === 1) {
+  } else if (timeDifference === 1) {
     return 'Tomorrow';
-  } else if (differenceInDays > 1) {
+  } else if (timeDifference > 1) {
     return formatDate(isoDate);
-  } else {
-    const absDifference = Math.abs(differenceInDays);
-
-    if (absDifference < 7) {
-      return `${absDifference} ${absDifference > 1 ? 'days' : 'day'}`;
-    } else {
-      const weeks = Math.floor(absDifference / 7);
-      if (weeks < 52) {
-        return `${weeks} ${weeks === 1 ? 'week' : 'weeks'}`;
-      } else {
-        const years = Math.floor(weeks / 52);
-        return `${years} ${years > 1 ? 'years' : 'year'}`;
-      }
-    }
   }
+
+  const absoluteDifference = Math.abs(timeDifference);
+
+  if (absoluteDifference < 7) {
+    return `${absoluteDifference} ${absoluteDifference > 1 ? 'days' : 'day'}`;
+  }
+
+  const weeks = Math.floor(absoluteDifference / 7);
+
+  if (weeks < 52) {
+    return `${weeks} ${weeks === 1 ? 'week' : 'weeks'}`;
+  }
+
+  const years = Math.floor(weeks / 52);
+
+  return `${years} ${years > 1 ? 'years' : 'year'}`;
 };

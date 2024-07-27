@@ -26,7 +26,7 @@ export const useTaskList = () => {
 
     for (const task of allTasks) {
       if (task.dueAt) {
-        if (dateDiff(now, task.dueAt) < 0) {
+        if (dateDiff(now, task.dueAt) < 0 && !task.isDone) {
           dueArr.push(task);
         } else if (dateDiff(now, task.dueAt) === 0) {
           todayArr.push(task);

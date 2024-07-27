@@ -1,3 +1,9 @@
+/**
+ * Converts a hexadecimal color code to its RGB representation.
+ *
+ * @param {string} hex - The hexadecimal color code to convert. It should not include the '#' symbol.
+ * @return {{ r: number; g: number; b: number }} - An object containing the red, green, and blue components of the color.
+ */
 function hexToRgb(hex: string): { r: number; g: number; b: number } {
   hex = hex.replace(/^#/, '');
 
@@ -9,6 +15,12 @@ function hexToRgb(hex: string): { r: number; g: number; b: number } {
   return { r, g, b };
 }
 
+/**
+ * Calculates the luminance of a color given its hexadecimal representation.
+ *
+ * @param {string} hex - The hexadecimal representation of the color.
+ * @return {number} The luminance value of the color.
+ */
 function luminance(hex: string) {
   const { r, g, b } = hexToRgb(hex);
 
@@ -20,6 +32,12 @@ function luminance(hex: string) {
   return a[0] * 0.2126 + a[1] * 0.7152 + a[2] * 0.0722;
 }
 
+/**
+ * Determines if a color is light based on its hexadecimal representation.
+ *
+ * @param {string} hex - The hexadecimal representation of the color.
+ * @return {boolean} True if the color is light, false otherwise.
+ */
 export function isLight(hex: string) {
   return luminance(hex) > 0.179;
 }
