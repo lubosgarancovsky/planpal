@@ -22,7 +22,7 @@ const TaskDetailFooter: React.FC<TaskDetailFooterProps> = ({
   save
 }) => {
   return (
-    <div className="flex gap-2 p-3 tb2:p-6 border-t border-foreground-dimmed/20 justify-between bg-background">
+    <div className="flex gap-2 p-3 tb2:px-6 border-t border-foreground-dimmed/20 justify-between bg-background">
       <Button
         onClick={() => remove.mutate(task.id)}
         startContent={<Trash />}

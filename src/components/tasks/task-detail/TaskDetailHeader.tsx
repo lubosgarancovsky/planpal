@@ -42,7 +42,7 @@ const TaskDetailHeader: React.FC<TaskDetailHeaderProps> = ({
             className={cn('text-foreground px-0')}
             startContent={<Calendar />}
           >
-            {task.dueAt ? formatDate(task.dueAt) : 'No due date'}
+            {task.dueAt ? formatDate(task.dueAt) : 'Add due date'}
           </Button>
         }
         onChange={(date) =>
