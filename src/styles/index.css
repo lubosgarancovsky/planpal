@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -7,21 +8,55 @@
   :root {
     --background: 0deg 0% 96%;
     --background-100: 0deg 0% 92%;
+    --background-200: 240deg 100% 96%;
 
     --foreground: 0deg 0% 0%;
     --foreground-dimmed: 0deg 0% 42%;
     --foreground-highlight: 215deg 20% 36%;
+
+    --danger: 359deg 67% 50%;
+    --warning: 47deg 75% 44%;
+    --success: 122deg 77% 34%;
+    --primary: 217deg 69% 48%;
+  }
+
+  :root[data-theme='dark'] {
+    --background: 239deg 18% 10%;
+    --background-100: 239deg 18% 20%;
+    --background-200: 239deg 23% 7%;
+
+    --foreground: 226deg 44% 89%;
+    --foreground-dimmed: 226deg 11% 65%;
+    --foreground-highlight: 226deg 44% 89%;
+
+    --danger: 359deg 100% 63%;
+    --warning: 47deg 63% 51%;
+    --success: 122deg 54% 53%;
+    --primary: 217deg 75% 55%;
   }
 
   html {
     font-family: 'Inter', sans-serif;
+    @apply text-foreground;
   }
 
   body {
     @apply bg-background;
   }
 
+  h1 {
+    @apply font-semibold text-xl tb2:text-2xl;
+  }
+
+  h2 {
+    @apply font-semibold text-xl;
+  }
+
   h4 {
     @apply font-medium text-foreground-highlight;
+  }
+
+  h5 {
+    @apply uppercase text-foreground-highlight text-sm tracking-widest;
   }
 }

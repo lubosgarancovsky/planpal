@@ -1,8 +1,16 @@
 import { createContext, useContext } from 'react';
+import { Task } from '../utils/api';
 
-export const TaskDetailContext = createContext<any>(null);
+interface TaskDetailContextType {
+  selectedTask: Task | null;
+  setSelectedTask: React.Dispatch<React.SetStateAction<Task | null>>;
+}
 
-export const useTaskDetail = () => {
+export const TaskDetailContext = createContext<TaskDetailContextType | null>(
+  null
+);
+
+export const useTaskDetailContex = () => {
   const ctx = useContext(TaskDetailContext);
 
   if (!ctx) {

@@ -1,17 +1,15 @@
+import { Layout } from './components';
 import { Provider } from './components/providers';
-import { TasksList, TaskDetail } from './components/tasks';
+import { TasksList } from './components/tasks';
+import NewTaskInput from './components/tasks/new-task-input/NewTaskInput';
 
 function App() {
   return (
     <Provider>
-      <div className="grid grid-cols-3">
-        <div className="col-span-2 p-8">
-          <TasksList />
-        </div>
-        <div className="border-l border-foreground-dimmed/20">
-          <TaskDetail />
-        </div>
-      </div>
+      <Layout>
+        <NewTaskInput />
+        <TasksList />
+      </Layout>
     </Provider>
   );
 }
